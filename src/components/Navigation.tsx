@@ -20,13 +20,13 @@ export function Navigation() {
         <header className="flex items-center justify-center py-6 z-50 relative">
             <nav className="flex items-center gap-10">
                 <Link className={getLinkClass("/")} href="/">
-                    Root
+                    Configuración
                 </Link>
                 <Link className={getLinkClass("/designer")} href="/designer">
-                    Designer
+                    Agente
                 </Link>
                 <Link className={getLinkClass("/index")} href="/index">
-                    Index
+                    Embeddings
                 </Link>
             </nav>
         </header>
