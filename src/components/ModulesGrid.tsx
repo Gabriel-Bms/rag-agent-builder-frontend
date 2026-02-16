@@ -444,13 +444,13 @@ export function ModulesGrid() {
           <div className="flex justify-between items-start mb-6">
             <div>
               <span className="text-[10px] font-bold text-[var(--brushed-bronze)] uppercase tracking-widest block mb-1">
-                Module 01
+                Módulo 01
               </span>
               <h3 className="text-xl font-bold text-[var(--obsidian-black)] tracking-tight">
-                Upload Document
+                Cargar Documento
               </h3>
             </div>
-            <span className="material-symbols-outlined text-[var(--champagne-gold)] p-2 bg-white/40 rounded-full">
+            <span className="material-symbols-outlined text-[var(--nvidia-green)] p-2 bg-white/40 rounded-full">
               cloud_upload
             </span>
           </div>
@@ -483,7 +483,7 @@ export function ModulesGrid() {
                 onClick={handleFileSelect}
                 className="px-6 py-2 bg-white/60 border border-[var(--brushed-bronze)]/20 rounded-full text-[var(--brushed-bronze)] text-[10px] font-bold uppercase tracking-widest hover:bg-white transition-all"
               >
-                Select File
+                Seleccionar Archivo
               </button>
             </div>
           ) : (
@@ -502,13 +502,13 @@ export function ModulesGrid() {
                 className="w-full py-2 bg-[var(--obsidian-black)] text-white rounded-lg text-xs font-bold uppercase tracking-widest hover:bg-[var(--gunmetal-gray)] transition-all flex items-center justify-center gap-2"
               >
                 <span className="material-symbols-outlined text-base">visibility</span>
-                Preview Content
+                Ver Contenido
               </button>
               <button
                 onClick={() => setUploadData(null)}
                 className="mt-2 text-[10px] font-bold text-[var(--brushed-bronze)] uppercase tracking-widest hover:underline"
               >
-                Upload New
+                Subir Nuevo
               </button>
             </div>
           )}
@@ -520,13 +520,13 @@ export function ModulesGrid() {
           <div className="flex justify-between items-start mb-8">
             <div>
               <span className="text-[10px] font-bold text-[var(--brushed-bronze)] uppercase tracking-widest block mb-1">
-                Module 02
+                Módulo 02
               </span>
               <h3 className="text-xl font-bold text-[var(--obsidian-black)] tracking-tight">
-                Split Document
+                Dividir Documento
               </h3>
             </div>
-            <span className="material-symbols-outlined text-[var(--champagne-gold)] p-2 bg-white/40 rounded-full">
+            <span className="material-symbols-outlined text-[var(--nvidia-green)] p-2 bg-white/40 rounded-full">
               content_cut
             </span>
           </div>
@@ -536,7 +536,7 @@ export function ModulesGrid() {
                 {/* Source Selector */}
                 <div className="space-y-2">
                   <label className="text-[10px] font-bold text-[var(--gunmetal-gray)] uppercase tracking-widest">
-                    Source
+                    Fuente
                   </label>
                   <CustomSelect
                     value={splitSource}
@@ -551,7 +551,7 @@ export function ModulesGrid() {
                 {/* Chunking Strategy Selector */}
                 <div className="space-y-2">
                   <label className="text-[10px] font-bold text-[var(--gunmetal-gray)] uppercase tracking-widest">
-                    Chunking Strategy
+                    Estrategia de Chunking
                   </label>
                   <select
                     className="custom-select w-full text-[var(--obsidian-black)] font-medium"
@@ -578,9 +578,9 @@ export function ModulesGrid() {
                 <button
                   onClick={handleProcessChunks}
                   disabled={!sessionId || isProcessing}
-                  className="w-full mt-4 bg-[var(--brushed-bronze)] text-white py-3 rounded-full font-bold uppercase tracking-widest text-[11px] shadow-lg shadow-gray-400/30 hover:brightness-110 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full mt-4 bg-[var(--obsidian-black)] text-white py-3 rounded-full font-bold uppercase tracking-widest text-[11px] shadow-lg shadow-gray-400/30 hover:brightness-110 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  {isProcessing ? "Processing..." : "Process Chunks"}
+                  {isProcessing ? "Processing..." : "Generar Chunks"}
                 </button>
               </>
             ) : (
@@ -595,7 +595,7 @@ export function ModulesGrid() {
                       onClick={() => setShowChunkPreview(true)}
                       className="text-sm font-bold text-[var(--nvidia-green)] hover:underline uppercase"
                     >
-                      View Samples
+                      Ver Muestras
                     </button>
                   </div>
                 </div>
@@ -618,13 +618,13 @@ export function ModulesGrid() {
           <div className="flex justify-between items-start mb-8">
             <div>
               <span className="text-[10px] font-bold text-[var(--brushed-bronze)] uppercase tracking-widest block mb-1">
-                Module 03
+                Módulo 03
               </span>
               <h3 className="text-xl font-bold text-[var(--obsidian-black)] tracking-tight">
                 Embeddings
               </h3>
             </div>
-            <span className="material-symbols-outlined text-[var(--champagne-gold)] p-2 bg-white/40 rounded-full">
+            <span className="material-symbols-outlined text-[var(--nvidia-green)] p-2 bg-white/40 rounded-full">
               memory
             </span>
           </div>
@@ -632,7 +632,7 @@ export function ModulesGrid() {
             {/* Provider Selector */}
             <div className="space-y-2">
               <label className="text-[10px] font-bold text-[var(--gunmetal-gray)] uppercase tracking-widest">
-                Provider
+                Proveedor
               </label>
               <CustomSelect
                 value={embeddingsProvider}
@@ -651,7 +651,7 @@ export function ModulesGrid() {
             {/* Embeddings Model Selector */}
             <div className="space-y-2">
               <label className="text-[10px] font-bold text-[var(--gunmetal-gray)] uppercase tracking-widest">
-                Embeddings Model
+                Modelo de Embeddings
               </label>
               <select
                 className="custom-select w-full text-[var(--obsidian-black)] font-medium"
@@ -668,7 +668,7 @@ export function ModulesGrid() {
             {(embeddingsProvider === "OpenAI" || embeddingsProvider === "Google GenAI") && (
               <div className="space-y-2">
                 <label className="text-[10px] font-bold text-[var(--gunmetal-gray)] uppercase tracking-widest">
-                  Connect Credentials
+                  Conectar Credenciales
                 </label>
                 <div className="flex items-center gap-2">
                   <div className="flex-1 flex items-center gap-2">
@@ -721,9 +721,9 @@ export function ModulesGrid() {
             <button
               onClick={handleGenerateEmbeddings}
               disabled={!sessionId || isGeneratingEmbeddings}
-              className="w-full mt-2 bg-[var(--brushed-bronze)] text-white py-3 rounded-full font-bold uppercase tracking-widest text-[11px] shadow-lg shadow-gray-400/30 hover:brightness-110 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full mt-2 bg-[var(--obsidian-black)] text-white py-3 rounded-full font-bold uppercase tracking-widest text-[11px] shadow-lg shadow-gray-400/30 hover:brightness-110 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {isGeneratingEmbeddings ? "Generating..." : "Generate Embeddings"}
+              {isGeneratingEmbeddings ? "Generating..." : "Generar Embeddings"}
             </button>
 
             {/* Error Display */}
@@ -777,13 +777,13 @@ export function ModulesGrid() {
           <div className="flex justify-between items-start mb-8">
             <div>
               <span className="text-[10px] font-bold text-[var(--brushed-bronze)] uppercase tracking-widest block mb-1">
-                Module 04
+                Módulo 04
               </span>
               <h3 className="text-xl font-bold text-[var(--obsidian-black)] tracking-tight">
-                Vector Database
+                Base de Datos Vectorial
               </h3>
             </div>
-            <span className="material-symbols-outlined text-[var(--nvidia-green)] p-2 bg-white/40 rounded-full">
+            <span className="material-symbols-outlined text-[var(--champagne-gold)] p-2 bg-white/40 rounded-full">
               database
             </span>
           </div>
@@ -791,7 +791,7 @@ export function ModulesGrid() {
             {/* Provider Selector */}
             <div className="space-y-2">
               <label className="text-[10px] font-bold text-[var(--gunmetal-gray)] uppercase tracking-widest">
-                Provider
+                Proveedor
               </label>
               <CustomSelect
                 value={vectorDbProvider}
@@ -808,7 +808,7 @@ export function ModulesGrid() {
             {/* Collections Selector */}
             <div className="space-y-2">
               <label className="text-[10px] font-bold text-[var(--gunmetal-gray)] uppercase tracking-widest">
-                Collections
+                Colecciones
               </label>
               <div className="flex items-center gap-2">
                 <select
@@ -837,9 +837,9 @@ export function ModulesGrid() {
             <button
               onClick={handleInsertEmbeddings}
               disabled={!sessionId || !selectedCollection || isInsertingEmbeddings}
-              className="w-full mt-2 bg-[var(--brushed-bronze)] text-white py-3 rounded-full font-bold uppercase tracking-widest text-[11px] shadow-lg shadow-gray-400/30 hover:brightness-110 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full mt-2 bg-[var(--obsidian-black)] text-white py-3 rounded-full font-bold uppercase tracking-widest text-[11px] shadow-lg shadow-gray-400/30 hover:brightness-110 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {isInsertingEmbeddings ? "Inserting..." : "Insert Embeddings"}
+              {isInsertingEmbeddings ? "Inserting..." : "Insertar Embeddings"}
             </button>
           </div>
         </div>
@@ -849,7 +849,7 @@ export function ModulesGrid() {
           <div className="flex justify-between items-start mb-8">
             <div>
               <span className="text-[10px] font-bold text-[var(--brushed-bronze)] uppercase tracking-widest block mb-1">
-                Module 05
+                Módulo 05
               </span>
               <h3 className="text-xl font-bold text-[var(--obsidian-black)] tracking-tight">
                 Rerankers
@@ -862,7 +862,7 @@ export function ModulesGrid() {
           <div className="space-y-6">
             <div className="space-y-2">
               <label className="text-[10px] font-bold text-[var(--gunmetal-gray)] uppercase tracking-widest">
-                Reranking Model
+                Modelo de Reranking
               </label>
               <select className="custom-select w-full text-[var(--obsidian-black)] font-medium">
                 <option>Cohere-Rerank-v3</option>
@@ -895,6 +895,14 @@ export function ModulesGrid() {
                 </button>
               </div>
             </div>
+
+            {/* Configurar Reranker Button */}
+            <button
+              disabled={!sessionId}
+              className="w-full mt-4 bg-[var(--obsidian-black)] text-white py-3 rounded-full font-bold uppercase tracking-widest text-[11px] shadow-lg shadow-gray-400/30 hover:brightness-110 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              Configurar Reranker
+            </button>
           </div>
         </div>
 
@@ -903,13 +911,13 @@ export function ModulesGrid() {
           <div className="flex justify-between items-start mb-8">
             <div>
               <span className="text-[10px] font-bold text-[var(--brushed-bronze)] uppercase tracking-widest block mb-1">
-                Module 06
+                Módulo 06
               </span>
               <h3 className="text-xl font-bold text-[var(--obsidian-black)] tracking-tight">
-                Language Model
+                Modelo de Lenguaje
               </h3>
             </div>
-            <span className="material-symbols-outlined text-[var(--nvidia-green)] p-2 bg-white/40 rounded-full">
+            <span className="material-symbols-outlined text-[var(--champagne-gold)] p-2 bg-white/40 rounded-full">
               psychology
             </span>
           </div>
@@ -918,7 +926,7 @@ export function ModulesGrid() {
               {/* Provider Selector */}
               <div className="space-y-2">
                 <label className="text-[10px] font-bold text-[var(--gunmetal-gray)] uppercase tracking-widest">
-                  Provider
+                  Proveedor
                 </label>
                 <CustomSelect
                   value={llmProvider}
@@ -932,7 +940,7 @@ export function ModulesGrid() {
               {/* Language Model Selector */}
               <div className="space-y-2">
                 <label className="text-[10px] font-bold text-[var(--gunmetal-gray)] uppercase tracking-widest">
-                  Language Model
+                  Modelo de Lenguaje
                 </label>
                 <select
                   className="custom-select w-full text-[var(--obsidian-black)] font-medium"
@@ -956,7 +964,7 @@ export function ModulesGrid() {
             {llmProvider === "OpenAI" && (
               <div className="space-y-2">
                 <label className="text-[10px] font-bold text-[var(--gunmetal-gray)] uppercase tracking-widest">
-                  Connect Credentials
+                  Conectar Credenciales
                 </label>
                 <div className="flex items-center gap-2">
                   <div className="flex-1 flex items-center gap-2">
@@ -1003,14 +1011,14 @@ export function ModulesGrid() {
               onClick={() => setShowParamsModal(true)}
               className="w-full bg-white/40 border border-[var(--gunmetal-gray)]/30 text-[var(--obsidian-black)] py-3 rounded-full font-bold uppercase tracking-widest text-[11px] hover:bg-white/60 transition-all"
             >
-              Parámetros Adicionales (T: {temperature})
+              Configurar parámetros (T: {temperature})
             </button>
 
             {/* Configure LLM Button */}
             <button
               onClick={handleConfigureLLM}
               disabled={!sessionId || !selectedLlmCredential || isConfiguringLLM}
-              className="w-full bg-[var(--brushed-bronze)] text-white py-3 rounded-full font-bold uppercase tracking-widest text-[11px] shadow-lg shadow-gray-400/30 hover:brightness-110 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full bg-[var(--obsidian-black)] text-white py-3 rounded-full font-bold uppercase tracking-widest text-[11px] shadow-lg shadow-gray-400/30 hover:brightness-110 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isConfiguringLLM ? "Configurando..." : llmConfigured ? "✓ Configurado" : "Configurar LLM"}
             </button>

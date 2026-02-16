@@ -20,10 +20,41 @@
 
 @layer base {
   body {
-    background: linear-gradient(135deg, #AAA 0%, #EBEBEB 100%);
+    background: linear-gradient(135deg, #AAA 0%, #EBEBEB 100%) !important;
     font-family: var(--font-jakarta-sans), sans-serif;
     color: var(--obsidian-black);
   }
+}
+
+.liquid-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.sphere {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.4;
+}
+
+.sphere-green {
+  background: var(--nvidia-green);
+  width: 400px;
+  height: 400px;
+  top: -100px;
+  right: -50px;
+}
+
+.sphere-black {
+  background: var(--obsidian-black);
+  width: 500px;
+  height: 500px;
+  bottom: -150px;
+  left: -100px;
 }
 
 
@@ -34,18 +65,16 @@
   --glass-border: color-mix(in oklab, var(--glass-bg) 70%, white);
 
   background: var(--glass-bg);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
   border: 1px solid var(--glass-border);
-  border-radius: 32px;
+  border-radius: 1.5rem;
 
-  /* shadow-2xl/20 -> 0 25px 50px -12px rgba(0, 0, 0, 0.25) but at 20% opacity effectively */
-  /* inset-shadow-sm -> inset 0 1px 2px 0 rgba(0, 0, 0, 0.05) */
-  /* inset-shadow-current/20 -> inset 0 1px 2px 0 rgba(255, 255, 255, 0.2) approx for light mode */
+  /* shadow-2xl/20 + inset-shadows */
   box-shadow:
-    0 25px 50px -12px rgba(0, 0, 0, 0.05),
+    0 25px 50px -12px rgba(0, 0, 0, 0.2),
     inset 0 1px 2px 0 rgba(0, 0, 0, 0.05),
-    inset 0 1px 2px 0 rgba(255, 255, 255, 0.15);
+    inset 0 1px 2px 0 rgba(255, 255, 255, 0.2);
 
   transition: transform 0.3s ease;
 }
