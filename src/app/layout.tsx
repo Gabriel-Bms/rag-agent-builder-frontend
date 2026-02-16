@@ -30,10 +30,7 @@ export default function RootLayout({
       <body
         className={`${jakartaSans.variable} antialiased min-h-screen selection:bg-[var(--nvidia-green)] selection:text-white relative flex flex-col`}
       >
-        <div className="liquid-canvas">
-          <div className="sphere sphere-green"></div>
-          <div className="sphere sphere-black"></div>
-        </div>
+
 
         <Navigation />
 

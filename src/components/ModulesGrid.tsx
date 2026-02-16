@@ -3,6 +3,8 @@
 
 import { useEffect, useState, useRef } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import { LangChainIcon, OpenAIIcon, ChromaIcon, DefaultIcon } from "./Icons";
+import { CustomSelect } from "./CustomSelect";
 
 interface UploadResponse {
   total_pages: number;
@@ -32,6 +34,7 @@ export function ModulesGrid() {
     sample_chunks: string[];
   } | null>(null);
   const [showChunkPreview, setShowChunkPreview] = useState(false);
+  const [showSplitParamsModal, setShowSplitParamsModal] = useState(false);
 
   // Chunking parameters
   const [chunkSize, setChunkSize] = useState(1000);
@@ -535,14 +538,14 @@ export function ModulesGrid() {
                   <label className="text-[10px] font-bold text-[var(--gunmetal-gray)] uppercase tracking-widest">
                     Source
                   </label>
-                  <select
-                    className="custom-select w-full text-[var(--obsidian-black)] font-medium"
+                  <CustomSelect
                     value={splitSource}
-                    onChange={(e) => setSplitSource(e.target.value)}
-                  >
-                    <option value="LangChain">LangChain</option>
-                    <option value="Custom">Custom</option>
-                  </select>
+                    onChange={setSplitSource}
+                    options={[
+                      { value: "LangChain", label: "LangChain", icon: LangChainIcon },
+                      { value: "Custom", label: "Custom", icon: DefaultIcon },
+                    ]}
+                  />
                 </div>
 
                 {/* Chunking Strategy Selector */}
@@ -563,165 +566,13 @@ export function ModulesGrid() {
                   </select>
                 </div>
 
-                {/* Dynamic Parameters based on Strategy */}
-                <div className="space-y-3 pt-2">
-                  {/* RecursiveCharacterTextSplitter Parameters */}
-                  {chunkingStrategy === 'RecursiveCharacterTextSplitter' && (
-                    <>
-                      <div className="grid grid-cols-2 gap-3">
-                        <div className="space-y-2">
-                          <label className="text-[10px] font-bold text-[var(--gunmetal-gray)] uppercase tracking-widest">
-                            Chunk Size
-                          </label>
-                          <input
-                            type="number"
-                            value={chunkSize}
-                            onChange={(e) => setChunkSize(Number(e.target.value))}
-                            className="w-full bg-white/40 border border-[var(--gunmetal-gray)]/30 rounded-lg py-2 px-3 text-sm font-medium text-[var(--obsidian-black)] focus:ring-2 focus:ring-[var(--brushed-bronze)]/20"
-                          />
-                        </div>
-                        <div className="space-y-2">
-                          <label className="text-[10px] font-bold text-[var(--gunmetal-gray)] uppercase tracking-widest">
-                            Chunk Overlap
-                          </label>
-                          <input
-                            type="number"
-                            value={chunkOverlap}
-                            onChange={(e) => setChunkOverlap(Number(e.target.value))}
-                            className="w-full bg-white/40 border border-[var(--gunmetal-gray)]/30 rounded-lg py-2 px-3 text-sm font-medium text-[var(--obsidian-black)] focus:ring-2 focus:ring-[var(--brushed-bronze)]/20"
-                          />
-                        </div>
-                      </div>
-                      <div className="space-y-2">
-                        <label className="text-[10px] font-bold text-[var(--gunmetal-gray)] uppercase tracking-widest">
-                          Separators
-                        </label>
-                        <div className="text-xs text-[var(--gunmetal-gray)] font-mono bg-white/30 p-2 rounded-lg border border-[var(--gunmetal-gray)]/20">
-                          ["\n\n", "\n", ". ", " ", ""]
-                        </div>
-                      </div>
-                    </>
-                  )}
-
-                  {/* CharacterTextSplitter Parameters */}
-                  {chunkingStrategy === 'CharacterTextSplitter' && (
-                    <>
-                      <div className="space-y-2">
-                        <label className="text-[10px] font-bold text-[var(--gunmetal-gray)] uppercase tracking-widest">
-                          Separator
-                        </label>
-                        <input
-                          type="text"
-                          value={separator}
-                          onChange={(e) => setSeparator(e.target.value)}
-                          className="w-full bg-white/40 border border-[var(--gunmetal-gray)]/30 rounded-lg py-2 px-3 text-sm font-mono text-[var(--obsidian-black)] focus:ring-2 focus:ring-[var(--brushed-bronze)]/20"
-                        />
-                      </div>
-                      <div className="grid grid-cols-2 gap-3">
-                        <div className="space-y-2">
-                          <label className="text-[10px] font-bold text-[var(--gunmetal-gray)] uppercase tracking-widest">
-                            Chunk Size
-                          </label>
-                          <input
-                            type="number"
-                            value={chunkSize}
-                            onChange={(e) => setChunkSize(Number(e.target.value))}
-                            className="w-full bg-white/40 border border-[var(--gunmetal-gray)]/30 rounded-lg py-2 px-3 text-sm font-medium text-[var(--obsidian-black)] focus:ring-2 focus:ring-[var(--brushed-bronze)]/20"
-                          />
-                        </div>
-                        <div className="space-y-2">
-                          <label className="text-[10px] font-bold text-[var(--gunmetal-gray)] uppercase tracking-widest">
-                            Chunk Overlap
-                          </label>
-                          <input
-                            type="number"
-                            value={chunkOverlap}
-                            onChange={(e) => setChunkOverlap(Number(e.target.value))}
-                            className="w-full bg-white/40 border border-[var(--gunmetal-gray)]/30 rounded-lg py-2 px-3 text-sm font-medium text-[var(--obsidian-black)] focus:ring-2 focus:ring-[var(--brushed-bronze)]/20"
-                          />
-                        </div>
-                      </div>
-                    </>
-                  )}
-
-                  {/* TokenTextSplitter Parameters */}
-                  {chunkingStrategy === 'TokenTextSplitter' && (
-                    <div className="grid grid-cols-2 gap-3">
-                      <div className="space-y-2">
-                        <label className="text-[10px] font-bold text-[var(--gunmetal-gray)] uppercase tracking-widest">
-                          Chunk Size (Tokens)
-                        </label>
-                        <input
-                          type="number"
-                          value={tokenChunkSize}
-                          onChange={(e) => setTokenChunkSize(Number(e.target.value))}
-                          className="w-full bg-white/40 border border-[var(--gunmetal-gray)]/30 rounded-lg py-2 px-3 text-sm font-medium text-[var(--obsidian-black)] focus:ring-2 focus:ring-[var(--brushed-bronze)]/20"
-                        />
-                      </div>
-                      <div className="space-y-2">
-                        <label className="text-[10px] font-bold text-[var(--gunmetal-gray)] uppercase tracking-widest">
-                          Chunk Overlap
-                        </label>
-                        <input
-                          type="number"
-                          value={tokenChunkOverlap}
-                          onChange={(e) => setTokenChunkOverlap(Number(e.target.value))}
-                          className="w-full bg-white/40 border border-[var(--gunmetal-gray)]/30 rounded-lg py-2 px-3 text-sm font-medium text-[var(--obsidian-black)] focus:ring-2 focus:ring-[var(--brushed-bronze)]/20"
-                        />
-                      </div>
-                    </div>
-                  )}
-
-                  {/* MarkdownHeaderTextSplitter Parameters */}
-                  {chunkingStrategy === 'MarkdownHeaderTextSplitter' && (
-                    <div className="space-y-2">
-                      <label className="text-[10px] font-bold text-[var(--gunmetal-gray)] uppercase tracking-widest">
-                        Headers to Split On
-                      </label>
-                      <div className="space-y-2">
-                        {[
-                          { symbol: '#', name: 'Header 1' },
-                          { symbol: '##', name: 'Header 2' },
-                          { symbol: '###', name: 'Header 3' }
-                        ].map((header, idx) => (
-                          <div key={idx} className="flex items-center gap-3 bg-white/30 p-2 rounded-lg border border-[var(--gunmetal-gray)]/20">
-                            <span className="text-xs font-mono font-bold text-[var(--obsidian-black)] bg-white/50 px-3 py-1 rounded">
-                              {header.symbol}
-                            </span>
-                            <span className="text-xs text-[var(--gunmetal-gray)] font-medium">
-                              {header.name}
-                            </span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* HTMLHeaderTextSplitter Parameters */}
-                  {chunkingStrategy === 'HTMLHeaderTextSplitter' && (
-                    <div className="space-y-2">
-                      <label className="text-[10px] font-bold text-[var(--gunmetal-gray)] uppercase tracking-widest">
-                        Headers to Split On
-                      </label>
-                      <div className="space-y-2">
-                        {[
-                          { tag: 'h1', name: 'Header 1' },
-                          { tag: 'h2', name: 'Header 2' },
-                          { tag: 'p', name: 'Paragraph' }
-                        ].map((header, idx) => (
-                          <div key={idx} className="flex items-center gap-3 bg-white/30 p-2 rounded-lg border border-[var(--gunmetal-gray)]/20">
-                            <span className="text-xs font-mono font-bold text-[var(--obsidian-black)] bg-white/50 px-3 py-1 rounded">
-                              {header.tag}
-                            </span>
-                            <span className="text-xs text-[var(--gunmetal-gray)] font-medium">
-                              {header.name}
-                            </span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                </div>
+                {/* Configurar Parámetros Button */}
+                <button
+                  onClick={() => setShowSplitParamsModal(true)}
+                  className="w-full bg-white/40 border border-[var(--gunmetal-gray)]/30 text-[var(--obsidian-black)] py-3 rounded-full font-bold uppercase tracking-widest text-[11px] hover:bg-white/60 transition-all"
+                >
+                  Configurar Parámetros
+                </button>
 
                 {/* Process Button */}
                 <button
@@ -783,18 +634,18 @@ export function ModulesGrid() {
               <label className="text-[10px] font-bold text-[var(--gunmetal-gray)] uppercase tracking-widest">
                 Provider
               </label>
-              <select
-                className="custom-select w-full text-[var(--obsidian-black)] font-medium"
+              <CustomSelect
                 value={embeddingsProvider}
-                onChange={(e) => {
-                  setEmbeddingsProvider(e.target.value);
+                onChange={(val) => {
+                  setEmbeddingsProvider(val);
                   setEmbeddingsModel(getModelOptions()[0] || "");
                 }}
-              >
-                <option value="OpenAI">OpenAI</option>
-                <option value="AWS Bedrock">AWS Bedrock</option>
-                <option value="Google GenAI">Google GenAI</option>
-              </select>
+                options={[
+                  { value: "OpenAI", label: "OpenAI", icon: OpenAIIcon },
+                  { value: "AWS Bedrock", label: "AWS Bedrock", icon: DefaultIcon },
+                  { value: "Google GenAI", label: "Google GenAI", icon: DefaultIcon },
+                ]}
+              />
             </div>
 
             {/* Embeddings Model Selector */}
@@ -942,16 +793,16 @@ export function ModulesGrid() {
               <label className="text-[10px] font-bold text-[var(--gunmetal-gray)] uppercase tracking-widest">
                 Provider
               </label>
-              <select
-                className="custom-select w-full text-[var(--obsidian-black)] font-medium"
+              <CustomSelect
                 value={vectorDbProvider}
-                onChange={(e) => setVectorDbProvider(e.target.value)}
-              >
-                <option value="FAISS">FAISS</option>
-                <option value="Chroma">Chroma</option>
-                <option value="Pinecone">Pinecone</option>
-                <option value="In-memory">In-memory</option>
-              </select>
+                onChange={setVectorDbProvider}
+                options={[
+                  { value: "FAISS", label: "FAISS", icon: DefaultIcon },
+                  { value: "Chroma", label: "Chroma", icon: ChromaIcon },
+                  { value: "Pinecone", label: "Pinecone", icon: DefaultIcon },
+                  { value: "In-memory", label: "In-memory", icon: DefaultIcon },
+                ]}
+              />
             </div>
 
             {/* Collections Selector */}
@@ -1063,40 +914,42 @@ export function ModulesGrid() {
             </span>
           </div>
           <div className="space-y-4">
-            {/* Provider Selector */}
-            <div className="space-y-2">
-              <label className="text-[10px] font-bold text-[var(--gunmetal-gray)] uppercase tracking-widest">
-                Provider
-              </label>
-              <select
-                className="custom-select w-full text-[var(--obsidian-black)] font-medium"
-                value={llmProvider}
-                onChange={(e) => setLlmProvider(e.target.value)}
-              >
-                <option value="OpenAI">OpenAI</option>
-              </select>
-            </div>
+            <div className="grid grid-cols-2 gap-4">
+              {/* Provider Selector */}
+              <div className="space-y-2">
+                <label className="text-[10px] font-bold text-[var(--gunmetal-gray)] uppercase tracking-widest">
+                  Provider
+                </label>
+                <CustomSelect
+                  value={llmProvider}
+                  onChange={setLlmProvider}
+                  options={[
+                    { value: "OpenAI", label: "OpenAI", icon: OpenAIIcon },
+                  ]}
+                />
+              </div>
 
-            {/* Language Model Selector */}
-            <div className="space-y-2">
-              <label className="text-[10px] font-bold text-[var(--gunmetal-gray)] uppercase tracking-widest">
-                Language Model
-              </label>
-              <select
-                className="custom-select w-full text-[var(--obsidian-black)] font-medium"
-                value={llmModel}
-                onChange={(e) => setLlmModel(e.target.value)}
-              >
-                <option value="gpt-5-nano">gpt-5-nano</option>
-                <option value="gpt-5.2-chat-latest">gpt-5.2-chat-latest</option>
-                <option value="gpt-5.1-chat-latest">gpt-5.1-chat-latest</option>
-                <option value="gpt-5-chat-latest">gpt-5-chat-latest</option>
-                <option value="gpt-4.1">gpt-4.1</option>
-                <option value="gpt-4.1-mini">gpt-4.1-mini</option>
-                <option value="gpt-4.1-nano">gpt-4.1-nano</option>
-                <option value="gpt-4o">gpt-4o</option>
-                <option value="gpt-4o-mini">gpt-4o-mini</option>
-              </select>
+              {/* Language Model Selector */}
+              <div className="space-y-2">
+                <label className="text-[10px] font-bold text-[var(--gunmetal-gray)] uppercase tracking-widest">
+                  Language Model
+                </label>
+                <select
+                  className="custom-select w-full text-[var(--obsidian-black)] font-medium"
+                  value={llmModel}
+                  onChange={(e) => setLlmModel(e.target.value)}
+                >
+                  <option value="gpt-5-nano">gpt-5-nano</option>
+                  <option value="gpt-5.2-chat-latest">gpt-5.2-chat-latest</option>
+                  <option value="gpt-5.1-chat-latest">gpt-5.1-chat-latest</option>
+                  <option value="gpt-5-chat-latest">gpt-5-chat-latest</option>
+                  <option value="gpt-4.1">gpt-4.1</option>
+                  <option value="gpt-4.1-mini">gpt-4.1-mini</option>
+                  <option value="gpt-4.1-nano">gpt-4.1-nano</option>
+                  <option value="gpt-4o">gpt-4o</option>
+                  <option value="gpt-4o-mini">gpt-4o-mini</option>
+                </select>
+              </div>
             </div>
 
             {/* Connect Credentials (only for OpenAI) */}
@@ -1379,6 +1232,193 @@ export function ModulesGrid() {
         </div>
       )}
 
+      {/* Split Params Modal */}
+      {showSplitParamsModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <div
+            className="absolute inset-0 bg-[var(--obsidian-black)]/60 backdrop-blur-sm"
+            onClick={() => setShowSplitParamsModal(false)}
+          ></div>
+          <div className="relative bg-white rounded-3xl w-full max-w-md flex flex-col shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-200">
+            <div className="px-8 py-6 border-b border-gray-100">
+              <h3 className="text-lg font-bold text-[var(--obsidian-black)]">
+                Configurar Parámetros
+              </h3>
+              <p className="text-xs text-[var(--gunmetal-gray)] mt-1">
+                Ajusta los parámetros de división
+              </p>
+            </div>
+            <div className="p-8">
+              <div className="space-y-3 pt-2">
+                {/* RecursiveCharacterTextSplitter Parameters */}
+                {chunkingStrategy === 'RecursiveCharacterTextSplitter' && (
+                  <>
+                    <div className="grid grid-cols-2 gap-3">
+                      <div className="space-y-2">
+                        <label className="text-[10px] font-bold text-[var(--gunmetal-gray)] uppercase tracking-widest">
+                          Chunk Size
+                        </label>
+                        <input
+                          type="number"
+                          value={chunkSize}
+                          onChange={(e) => setChunkSize(Number(e.target.value))}
+                          className="w-full bg-white/40 border border-[var(--gunmetal-gray)]/30 rounded-lg py-2 px-3 text-sm font-medium text-[var(--obsidian-black)] focus:ring-2 focus:ring-[var(--brushed-bronze)]/20"
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <label className="text-[10px] font-bold text-[var(--gunmetal-gray)] uppercase tracking-widest">
+                          Chunk Overlap
+                        </label>
+                        <input
+                          type="number"
+                          value={chunkOverlap}
+                          onChange={(e) => setChunkOverlap(Number(e.target.value))}
+                          className="w-full bg-white/40 border border-[var(--gunmetal-gray)]/30 rounded-lg py-2 px-3 text-sm font-medium text-[var(--obsidian-black)] focus:ring-2 focus:ring-[var(--brushed-bronze)]/20"
+                        />
+                      </div>
+                    </div>
+                    <div className="space-y-2">
+                      <label className="text-[10px] font-bold text-[var(--gunmetal-gray)] uppercase tracking-widest">
+                        Separators
+                      </label>
+                      <div className="text-xs text-[var(--gunmetal-gray)] font-mono bg-white/30 p-2 rounded-lg border border-[var(--gunmetal-gray)]/20">
+                        ["\n\n", "\n", ". ", " ", ""]
+                      </div>
+                    </div>
+                  </>
+                )}
+
+                {/* CharacterTextSplitter Parameters */}
+                {chunkingStrategy === 'CharacterTextSplitter' && (
+                  <>
+                    <div className="space-y-2">
+                      <label className="text-[10px] font-bold text-[var(--gunmetal-gray)] uppercase tracking-widest">
+                        Separator
+                      </label>
+                      <input
+                        type="text"
+                        value={separator}
+                        onChange={(e) => setSeparator(e.target.value)}
+                        className="w-full bg-white/40 border border-[var(--gunmetal-gray)]/30 rounded-lg py-2 px-3 text-sm font-mono text-[var(--obsidian-black)] focus:ring-2 focus:ring-[var(--brushed-bronze)]/20"
+                      />
+                    </div>
+                    <div className="grid grid-cols-2 gap-3">
+                      <div className="space-y-2">
+                        <label className="text-[10px] font-bold text-[var(--gunmetal-gray)] uppercase tracking-widest">
+                          Chunk Size
+                        </label>
+                        <input
+                          type="number"
+                          value={chunkSize}
+                          onChange={(e) => setChunkSize(Number(e.target.value))}
+                          className="w-full bg-white/40 border border-[var(--gunmetal-gray)]/30 rounded-lg py-2 px-3 text-sm font-medium text-[var(--obsidian-black)] focus:ring-2 focus:ring-[var(--brushed-bronze)]/20"
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <label className="text-[10px] font-bold text-[var(--gunmetal-gray)] uppercase tracking-widest">
+                          Chunk Overlap
+                        </label>
+                        <input
+                          type="number"
+                          value={chunkOverlap}
+                          onChange={(e) => setChunkOverlap(Number(e.target.value))}
+                          className="w-full bg-white/40 border border-[var(--gunmetal-gray)]/30 rounded-lg py-2 px-3 text-sm font-medium text-[var(--obsidian-black)] focus:ring-2 focus:ring-[var(--brushed-bronze)]/20"
+                        />
+                      </div>
+                    </div>
+                  </>
+                )}
+
+                {/* TokenTextSplitter Parameters */}
+                {chunkingStrategy === 'TokenTextSplitter' && (
+                  <div className="grid grid-cols-2 gap-3">
+                    <div className="space-y-2">
+                      <label className="text-[10px] font-bold text-[var(--gunmetal-gray)] uppercase tracking-widest">
+                        Chunk Size (Tokens)
+                      </label>
+                      <input
+                        type="number"
+                        value={tokenChunkSize}
+                        onChange={(e) => setTokenChunkSize(Number(e.target.value))}
+                        className="w-full bg-white/40 border border-[var(--gunmetal-gray)]/30 rounded-lg py-2 px-3 text-sm font-medium text-[var(--obsidian-black)] focus:ring-2 focus:ring-[var(--brushed-bronze)]/20"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="text-[10px] font-bold text-[var(--gunmetal-gray)] uppercase tracking-widest">
+                        Chunk Overlap
+                      </label>
+                      <input
+                        type="number"
+                        value={tokenChunkOverlap}
+                        onChange={(e) => setTokenChunkOverlap(Number(e.target.value))}
+                        className="w-full bg-white/40 border border-[var(--gunmetal-gray)]/30 rounded-lg py-2 px-3 text-sm font-medium text-[var(--obsidian-black)] focus:ring-2 focus:ring-[var(--brushed-bronze)]/20"
+                      />
+                    </div>
+                  </div>
+                )}
+
+                {/* MarkdownHeaderTextSplitter Parameters */}
+                {chunkingStrategy === 'MarkdownHeaderTextSplitter' && (
+                  <div className="space-y-2">
+                    <label className="text-[10px] font-bold text-[var(--gunmetal-gray)] uppercase tracking-widest">
+                      Headers to Split On
+                    </label>
+                    <div className="space-y-2">
+                      {[
+                        { symbol: '#', name: 'Header 1' },
+                        { symbol: '##', name: 'Header 2' },
+                        { symbol: '###', name: 'Header 3' }
+                      ].map((header, idx) => (
+                        <div key={idx} className="flex items-center gap-3 bg-white/30 p-2 rounded-lg border border-[var(--gunmetal-gray)]/20">
+                          <span className="text-xs font-mono font-bold text-[var(--obsidian-black)] bg-white/50 px-3 py-1 rounded">
+                            {header.symbol}
+                          </span>
+                          <span className="text-xs text-[var(--gunmetal-gray)] font-medium">
+                            {header.name}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* HTMLHeaderTextSplitter Parameters */}
+                {chunkingStrategy === 'HTMLHeaderTextSplitter' && (
+                  <div className="space-y-2">
+                    <label className="text-[10px] font-bold text-[var(--gunmetal-gray)] uppercase tracking-widest">
+                      Headers to Split On
+                    </label>
+                    <div className="space-y-2">
+                      {[
+                        { tag: 'h1', name: 'Header 1' },
+                        { tag: 'h2', name: 'Header 2' },
+                        { tag: 'p', name: 'Paragraph' }
+                      ].map((header, idx) => (
+                        <div key={idx} className="flex items-center gap-3 bg-white/30 p-2 rounded-lg border border-[var(--gunmetal-gray)]/20">
+                          <span className="text-xs font-mono font-bold text-[var(--obsidian-black)] bg-white/50 px-3 py-1 rounded">
+                            {header.tag}
+                          </span>
+                          <span className="text-xs text-[var(--gunmetal-gray)] font-medium">
+                            {header.name}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+            <div className="px-8 py-4 bg-gray-50 border-t border-gray-100 flex gap-3 justify-end">
+              <button
+                onClick={() => setShowSplitParamsModal(false)}
+                className="px-6 py-2 bg-[var(--brushed-bronze)] text-white rounded-xl text-xs font-bold uppercase tracking-widest hover:brightness-110 transition-all"
+              >
+                Guardar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
       {/* Parameters Modal */}
       {showParamsModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">

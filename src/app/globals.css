@@ -20,49 +20,38 @@
 
 @layer base {
   body {
-      background: linear-gradient(135deg, #AAA 0%, #EBEBEB 100%);
-      font-family: var(--font-jakarta-sans), sans-serif;
-      color: var(--obsidian-black);
+    background: linear-gradient(135deg, #AAA 0%, #EBEBEB 100%);
+    font-family: var(--font-jakarta-sans), sans-serif;
+    color: var(--obsidian-black);
   }
 }
 
-.liquid-canvas {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  overflow: hidden;
-}
 
-.sphere {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(80px);
-  opacity: 0.4;
-}
-
-.sphere-green {
-  background: var(--nvidia-green);
-  width: 400px;
-  height: 400px;
-  top: -100px;
-  right: -50px;
-}
-
-.sphere-black {
-  background: var(--obsidian-black);
-  width: 500px;
-  height: 500px;
-  bottom: -150px;
-  left: -100px;
-}
 
 .glass-panel {
-  background: rgba(235, 235, 235, 0.4);
-  backdrop-filter: blur(25px);
-  -webkit-backdrop-filter: blur(25px);
-  border: 1px solid rgba(255, 255, 255, 0.5);
+  --bg: transparent;
+  --glass-bg: color-mix(in oklab, var(--bg) 80%, transparent);
+  --glass-border: color-mix(in oklab, var(--glass-bg) 70%, white);
+
+  background: var(--glass-bg);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid var(--glass-border);
   border-radius: 32px;
-  box-shadow: 0 10px 40px -10px rgba(122, 107, 85, 0.15), inset 0 0 20px rgba(255, 255, 255, 0.3);
+
+  /* shadow-2xl/20 -> 0 25px 50px -12px rgba(0, 0, 0, 0.25) but at 20% opacity effectively */
+  /* inset-shadow-sm -> inset 0 1px 2px 0 rgba(0, 0, 0, 0.05) */
+  /* inset-shadow-current/20 -> inset 0 1px 2px 0 rgba(255, 255, 255, 0.2) approx for light mode */
+  box-shadow:
+    0 25px 50px -12px rgba(0, 0, 0, 0.05),
+    inset 0 1px 2px 0 rgba(0, 0, 0, 0.05),
+    inset 0 1px 2px 0 rgba(255, 255, 255, 0.15);
+
+  transition: transform 0.3s ease;
+}
+
+.glass-panel:hover {
+  transform: scale(1.02);
 }
 
 .portal-upload {
@@ -90,13 +79,7 @@
   box-shadow: 0 0 15px rgba(118, 185, 0, 0.4);
 }
 
-.liquid-path {
-  stroke: var(--nvidia-green);
-  stroke-width: 2.5;
-  fill: none;
-  opacity: 0.4;
-  stroke-linecap: round;
-}
+
 
 .header-solid {
   background: #FFF;
