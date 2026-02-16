@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Liquid Premium RAG Workspace</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <style type="text/tailwindcss">:root {
+    --nvidia-green: #76B900;
+    --brushed-bronze: #7A6B55;
+    --champagne-gold: #B39B7D;
+    --titanium-silver: #AAA;
+    --platinum-white: #EBEBEB;
+    --obsidian-black: #000;
+    --gunmetal-gray: #5E5C63
+    }
+@layer base {
+    body {
+        background: linear-gradient(135deg, #AAA 0%, #EBEBEB 100%);
+        font-family: "Plus Jakarta Sans", sans-serif;
+        color: var(--obsidian-black);
+        }
+    }
+.liquid-canvas {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden
+    }
+.sphere {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.4
+    }
+.sphere-green {
+    background: var(--nvidia-green);
+    width: 400px;
+    height: 400px;
+    top: -100px;
+    right: -50px
+    }
+.sphere-black {
+    background: var(--obsidian-black);
+    width: 500px;
+    height: 500px;
+    bottom: -150px;
+    left: -100px
+    }
+.glass-panel {
+    background: rgba(235, 235, 235, 0.4);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 32px;
+    box-shadow: 0 10px 40px -10px rgba(122, 107, 85, 0.15), inset 0 0 20px rgba(255, 255, 255, 0.3)
+    }
+.portal-upload {
+    background: rgba(255, 255, 255, 0.3);
+    border: 2px dashed var(--champagne-gold);
+    border-radius: 24px;
+    box-shadow: inset 0 0 30px rgba(179, 155, 125, 0.05)
+    }
+.custom-select {
+    appearance: none;
+    background-color: rgba(255, 255, 255, 0.4);
+    border: 1px solid var(--gunmetal-gray);
+    border-radius: 12px;
+    padding: 12px 16px;
+    font-size: 0.875rem;
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuC9uMOlTlY-xfqlNbChtaPXVbBSVDZL5Q3yajDdjzLUH_ykG8Zzm1RJCz0EMnJePGq8NsdaUDUMtGc0ss0zb8PlCixRY1CAwucHdnRxfrmpLJ57Tejpi2_aUnzjNdorO7VUsTBWv298sQMRTiRzrTPOBG2vPxIbmcuGJaIwTQbuJCfu5URiQjqP5Z4ajFVrXzqEWgkl5uau9qUBV3bpLmGJW8A1DD65q0qBtUiEGLloXC-QuLNZNRdepwixiHVqGCOwO-7J54lMGXM);
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1.2em
+    }
+.active-state {
+    background-color: var(--nvidia-green);
+    box-shadow: 0 0 15px rgba(118, 185, 0, 0.4)
+    }
+.liquid-path {
+    stroke: var(--nvidia-green);
+    stroke-width: 2.5;
+    fill: none;
+    opacity: 0.4;
+    stroke-linecap: round
+    }
+.header-solid {
+    background: #FFF;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05)
+    }</style>
+</head>
+
+<body class="min-h-screen selection:bg-[var(--nvidia-green)] selection:text-white">
+    <div class="liquid-canvas">
+        <div class="sphere sphere-green"></div>
+        <div class="sphere sphere-black"></div>
+    </div>
+    <div class="flex flex-col h-screen max-h-screen">
+        <header class="flex items-center justify-between px-10 py-4 header-solid z-50">
+            <div class="flex items-center gap-4">
+                <div class="size-10 bg-[var(--obsidian-black)] rounded-xl flex items-center justify-center">
+                    <span class="material-symbols-outlined text-white">architecture</span>
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold tracking-tight text-[var(--obsidian-black)]">Elite Architectural <span
+                            class="text-[var(--nvidia-green)]">RAG</span></h1>
+                    <p class="text-[10px] uppercase tracking-[0.2em] text-[var(--gunmetal-gray)] font-semibold">
+                        Strategic Intelligence Console</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-12">
+                <nav class="flex items-center gap-10">
+                    <a class="text-[var(--gunmetal-gray)] hover:text-[var(--obsidian-black)] transition-all text-xs font-bold uppercase tracking-widest"
+                        href="#">Root</a>
+                    <a class="text-[var(--nvidia-green)] border-b-2 border-[var(--nvidia-green)] pb-1 text-xs font-bold uppercase tracking-widest"
+                        href="#">Designer</a>
+                    <a class="text-[var(--gunmetal-gray)] hover:text-[var(--obsidian-black)] transition-all text-xs font-bold uppercase tracking-widest"
+                        href="#">Index</a>
+                </nav>
+                <div class="h-8 w-[1px] bg-[var(--gunmetal-gray)]/20"></div>
+                <button
+                    class="bg-[var(--brushed-bronze)] hover:brightness-110 text-white px-6 py-2.5 rounded-full font-bold text-xs uppercase tracking-widest transition-all shadow-lg shadow-gray-400/20">
+                    Initialize System
+                </button>
+            </div>
+        </header>
+        <main class="flex-1 flex p-8 gap-8 relative overflow-hidden">
+            <svg class="absolute inset-0 w-full h-full pointer-events-none z-0" xmlns="http://www.w3.org/2000/svg">
+                <path class="liquid-path" d="M 400 300 Q 450 350, 400 400"></path>
+                <path class="liquid-path" d="M 820 300 Q 870 350, 820 400"></path>
+                <circle cx="410" cy="350" fill="var(--nvidia-green)" r="4"></circle>
+                <circle cx="830" cy="350" fill="var(--nvidia-green)" r="4"></circle>
+            </svg>
+            <div class="w-[880px] grid grid-rows-2 gap-8 relative z-10">
+                <div class="grid grid-cols-2 gap-8">
+                    <div class="glass-panel p-8 flex flex-col">
+                        <div class="flex justify-between items-start mb-6">
+                            <div>
+                                <span
+                                    class="text-[10px] font-bold text-[var(--brushed-bronze)] uppercase tracking-widest block mb-1">Module
+                                    01</span>
+                                <h3 class="text-xl font-bold text-[var(--obsidian-black)] tracking-tight">Upload
+                                    Document</h3>
+                            </div>
+                            <span
+                                class="material-symbols-outlined text-[var(--champagne-gold)] p-2 bg-white/40 rounded-full">cloud_upload</span>
+                        </div>
+                        <div
+                            class="flex-1 portal-upload flex flex-col items-center justify-center p-6 transition-all hover:bg-white/20">
+                            <div
+                                class="size-16 rounded-full bg-white flex items-center justify-center mb-4 shadow-xl shadow-gray-400/10">
+                                <span class="material-symbols-outlined text-3xl text-[var(--champagne-gold)]">add</span>
+                            </div>
+                            <p class="text-xs text-[var(--gunmetal-gray)] text-center font-semibold mb-4">DRAG &amp;
+                                DROP DATA CORE</p>
+                            <button
+                                class="px-6 py-2 bg-white/60 border border-[var(--brushed-bronze)]/20 rounded-full text-[var(--brushed-bronze)] text-[10px] font-bold uppercase tracking-widest hover:bg-white transition-all">Select
+                                File</button>
+                        </div>
+                    </div>
+                    <div class="glass-panel p-8 flex flex-col">
+                        <div class="flex justify-between items-start mb-8">
+                            <div>
+                                <span
+                                    class="text-[10px] font-bold text-[var(--brushed-bronze)] uppercase tracking-widest block mb-1">Module
+                                    02</span>
+                                <h3 class="text-xl font-bold text-[var(--obsidian-black)] tracking-tight">Split Document
+                                </h3>
+                            </div>
+                            <span
+                                class="material-symbols-outlined text-[var(--champagne-gold)] p-2 bg-white/40 rounded-full">content_cut</span>
+                        </div>
+                        <div class="space-y-6">
+                            <div class="space-y-2">
+                                <label
+                                    class="text-[10px] font-bold text-[var(--gunmetal-gray)] uppercase tracking-widest">Segmentation
+                                    Strategy</label>
+                                <select class="custom-select w-full text-[var(--obsidian-black)] font-medium">
+                                    <option>Recursive Character Optimizer</option>
+                                    <option>Semantic AI Cluster</option>
+                                    <option>Fixed Token Window</option>
+                                </select>
+                            </div>
+                            <div class="space-y-4">
+                                <div class="flex justify-between items-center">
+                                    <span
+                                        class="text-[10px] font-bold text-[var(--gunmetal-gray)] uppercase tracking-widest">Chunk
+                                        Size</span>
+                                    <span class="text-xs font-bold text-[var(--nvidia-green)]">512 Tokens</span>
+                                </div>
+                                <div class="h-2 w-full bg-white/40 rounded-full overflow-hidden">
+                                    <div class="h-full bg-[var(--nvidia-green)] w-3/5 rounded-full"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-8">
+                    <div class="glass-panel p-8 flex flex-col">
+                        <div class="flex justify-between items-start mb-8">
+                            <div>
+                                <span
+                                    class="text-[10px] font-bold text-[var(--brushed-bronze)] uppercase tracking-widest block mb-1">Module
+                                    03</span>
+                                <h3 class="text-xl font-bold text-[var(--obsidian-black)] tracking-tight">Embeddings
+                                </h3>
+                            </div>
+                            <span
+                                class="material-symbols-outlined text-[var(--champagne-gold)] p-2 bg-white/40 rounded-full">memory</span>
+                        </div>
+                        <div class="space-y-6">
+                            <div class="space-y-2">
+                                <label
+                                    class="text-[10px] font-bold text-[var(--gunmetal-gray)] uppercase tracking-widest">Neural
+                                    Engine</label>
+                                <select class="custom-select w-full text-[var(--obsidian-black)] font-medium">
+                                    <option>Titan-Base-01</option>
+                                    <option>Omni-Large-Architecture</option>
+                                </select>
+                            </div>
+                            <div class="space-y-3">
+                                <label
+                                    class="text-[10px] font-bold text-[var(--gunmetal-gray)] uppercase tracking-widest">Dimensions</label>
+                                <div class="grid grid-cols-3 gap-2">
+                                    <button
+                                        class="py-2.5 rounded-xl border-2 border-[var(--nvidia-green)] bg-[var(--nvidia-green)]/10 text-[11px] text-[var(--nvidia-green)] font-bold">1536</button>
+                                    <button
+                                        class="py-2.5 rounded-xl border border-[var(--gunmetal-gray)]/20 text-[11px] text-[var(--gunmetal-gray)] font-bold hover:bg-white/50">1024</button>
+                                    <button
+                                        class="py-2.5 rounded-xl border border-[var(--gunmetal-gray)]/20 text-[11px] text-[var(--gunmetal-gray)] font-bold hover:bg-white/50">768</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="glass-panel p-8 flex flex-col">
+                        <div class="flex justify-between items-start mb-8">
+                            <div>
+                                <span
+                                    class="text-[10px] font-bold text-[var(--brushed-bronze)] uppercase tracking-widest block mb-1">Module
+                                    04</span>
+                                <h3 class="text-xl font-bold text-[var(--obsidian-black)] tracking-tight">Vector
+                                    Database</h3>
+                            </div>
+                            <span
+                                class="material-symbols-outlined text-[var(--nvidia-green)] p-2 bg-white/40 rounded-full">database</span>
+                        </div>
+                        <div class="space-y-6">
+                            <div class="space-y-2">
+                                <label
+                                    class="text-[10px] font-bold text-[var(--gunmetal-gray)] uppercase tracking-widest">Cluster
+                                    Target</label>
+                                <select class="custom-select w-full text-[var(--obsidian-black)] font-medium">
+                                    <option>PINECONE_V3_CLOUD</option>
+                                    <option>WEAVIATE_ENTERPRISE</option>
+                                </select>
+                            </div>
+                            <div class="pt-2">
+                                <div
+                                    class="flex justify-between text-[10px] font-bold text-[var(--gunmetal-gray)] uppercase mb-2">
+                                    <span>Sync Status</span>
+                                    <span class="text-[var(--nvidia-green)] font-bold">READY</span>
+                                </div>
+                                <div class="h-2 w-full bg-white/40 rounded-full overflow-hidden">
+                                    <div
+                                        class="h-full bg-gradient-to-r from-[var(--brushed-bronze)] to-[var(--nvidia-green)] w-full">
+                                    </div>
+                                </div>
+                            </div>
+                            <button
+                                class="w-full bg-[var(--brushed-bronze)] text-white py-3.5 rounded-full font-bold uppercase tracking-widest text-[11px] shadow-lg shadow-gray-400/30 hover:brightness-110 transition-all">
+                                Save Pipeline Configuration
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex-1 glass-panel flex flex-col relative z-10 border-white">
+                <div class="px-8 py-6 border-b border-white/40 flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <div class="size-2.5 rounded-full bg-[var(--nvidia-green)] active-state"></div>
+                        <h3 class="text-xs font-bold uppercase tracking-[0.2em] text-[var(--obsidian-black)]">
+                            Interface.Retrieval_v4</h3>
+                    </div>
+                    <div class="flex gap-4">
+                        <span
+                            class="material-symbols-outlined text-[var(--brushed-bronze)] cursor-pointer hover:text-[var(--obsidian-black)] transition-colors">settings</span>
+                        <span
+                            class="material-symbols-outlined text-[var(--gunmetal-gray)] cursor-pointer hover:text-[var(--obsidian-black)] transition-colors">terminal</span>
+                    </div>
+                </div>
+                <div class="flex-1 overflow-y-auto p-8 space-y-8">
+                    <div class="flex gap-4 max-w-[90%]">
+                        <div class="size-10 shrink-0 bg-white rounded-2xl shadow-sm flex items-center justify-center">
+                            <span class="material-symbols-outlined text-[var(--nvidia-green)] text-xl">smart_toy</span>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="text-[10px] font-bold text-[var(--gunmetal-gray)] uppercase tracking-widest">
+                                System Architect</div>
+                            <div
+                                class="p-5 bg-white/60 border border-white/80 rounded-3xl rounded-tl-none text-sm leading-relaxed text-[var(--obsidian-black)] shadow-sm">
+                                Pipeline architectural parameters verified. Ready for document ingestion and
+                                high-dimensional vectorization.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex gap-4 max-w-[90%] ml-auto flex-row-reverse">
+                        <div
+                            class="size-10 shrink-0 bg-[var(--brushed-bronze)] rounded-2xl shadow-sm flex items-center justify-center">
+                            <span class="material-symbols-outlined text-white text-xl">person</span>
+                        </div>
+                        <div class="space-y-2 text-right">
+                            <div class="text-[10px] font-bold text-[var(--gunmetal-gray)] uppercase tracking-widest">
+                                Operator Console</div>
+                            <div
+                                class="p-5 bg-[var(--obsidian-black)] text-white rounded-3xl rounded-tr-none text-sm leading-relaxed text-left shadow-xl shadow-black/10">
+                                Analyze the relationship between chunk size and retrieval accuracy for technical
+                                documentation.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-8 bg-white/20 border-t border-white/40 rounded-b-[32px]">
+                    <div class="relative">
+                        <input
+                            class="w-full bg-white/80 border-none rounded-2xl py-4 pl-6 pr-16 text-sm font-medium text-[var(--obsidian-black)] shadow-sm focus:ring-2 focus:ring-[var(--brushed-bronze)]/20 transition-all placeholder:text-[var(--gunmetal-gray)]/50"
+                            placeholder="Ask architectural engine..." type="text" />
+                        <button
+                            class="absolute right-3 top-1/2 -translate-y-1/2 bg-[var(--champagne-gold)] text-white size-10 rounded-xl flex items-center justify-center hover:bg-[var(--brushed-bronze)] transition-all shadow-md shadow-gray-400/20">
+                            <span class="material-symbols-outlined">send</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <footer class="bg-white/80 border-t border-white/40 px-10 py-4 flex items-center justify-between z-50">
+            <div class="flex items-center gap-12">
+                <div class="flex items-center gap-3">
+                    <span
+                        class="text-[10px] font-bold text-[var(--gunmetal-gray)] uppercase tracking-widest">Latency:</span>
+                    <span class="text-xs font-bold text-[var(--nvidia-green)]">42ms</span>
+                </div>
+                <div class="flex items-center gap-3">
+                    <span
+                        class="text-[10px] font-bold text-[var(--gunmetal-gray)] uppercase tracking-widest">Security:</span>
+                    <div class="flex gap-1.5">
+                        <div class="size-2 bg-[var(--nvidia-green)] rounded-full active-state"></div>
+                        <div class="size-2 bg-[var(--nvidia-green)] rounded-full active-state"></div>
+                        <div class="size-2 bg-[var(--nvidia-green)] rounded-full active-state"></div>
+                        <div class="size-2 bg-gray-200 rounded-full"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex items-center gap-6">
+                <div class="flex items-center gap-2">
+                    <span class="text-[10px] font-bold text-[var(--gunmetal-gray)] uppercase tracking-widest mr-2">Core
+                        Version:</span>
+                    <div class="flex -space-x-1">
+                        <div
+                            class="px-3 py-1 bg-white border border-gray-100 rounded-l-full text-[9px] font-bold text-gray-400">
+                            V.1</div>
+                        <div
+                            class="px-3 py-1 bg-[var(--nvidia-green)] text-white border border-[var(--nvidia-green)] rounded-full text-[9px] font-bold shadow-lg shadow-[var(--nvidia-green)]/30">
+                            V.2</div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+</body>
+
+</html>

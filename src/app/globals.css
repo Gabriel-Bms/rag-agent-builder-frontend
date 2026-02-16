@@ -3,24 +3,102 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --nvidia-green: #76B900;
+  --brushed-bronze: #7A6B55;
+  --champagne-gold: #B39B7D;
+  --titanium-silver: #AAA;
+  --platinum-white: #EBEBEB;
+  --obsidian-black: #000;
+  --gunmetal-gray: #5E5C63;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-jakarta-sans);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  body {
+      background: linear-gradient(135deg, #AAA 0%, #EBEBEB 100%);
+      font-family: var(--font-jakarta-sans), sans-serif;
+      color: var(--obsidian-black);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+.liquid-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.sphere {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.4;
+}
+
+.sphere-green {
+  background: var(--nvidia-green);
+  width: 400px;
+  height: 400px;
+  top: -100px;
+  right: -50px;
+}
+
+.sphere-black {
+  background: var(--obsidian-black);
+  width: 500px;
+  height: 500px;
+  bottom: -150px;
+  left: -100px;
+}
+
+.glass-panel {
+  background: rgba(235, 235, 235, 0.4);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 32px;
+  box-shadow: 0 10px 40px -10px rgba(122, 107, 85, 0.15), inset 0 0 20px rgba(255, 255, 255, 0.3);
+}
+
+.portal-upload {
+  background: rgba(255, 255, 255, 0.3);
+  border: 2px dashed var(--champagne-gold);
+  border-radius: 24px;
+  box-shadow: inset 0 0 30px rgba(179, 155, 125, 0.05);
+}
+
+.custom-select {
+  appearance: none;
+  background-color: rgba(255, 255, 255, 0.4);
+  border: 1px solid var(--gunmetal-gray);
+  border-radius: 12px;
+  padding: 12px 16px;
+  font-size: 0.875rem;
+  background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuC9uMOlTlY-xfqlNbChtaPXVbBSVDZL5Q3yajDdjzLUH_ykG8Zzm1RJCz0EMnJePGq8NsdaUDUMtGc0ss0zb8PlCixRY1CAwucHdnRxfrmpLJ57Tejpi2_aUnzjNdorO7VUsTBWv298sQMRTiRzrTPOBG2vPxIbmcuGJaIwTQbuJCfu5URiQjqP5Z4ajFVrXzqEWgkl5uau9qUBV3bpLmGJW8A1DD65q0qBtUiEGLloXC-QuLNZNRdepwixiHVqGCOwO-7J54lMGXM);
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1.2em;
+}
+
+.active-state {
+  background-color: var(--nvidia-green);
+  box-shadow: 0 0 15px rgba(118, 185, 0, 0.4);
+}
+
+.liquid-path {
+  stroke: var(--nvidia-green);
+  stroke-width: 2.5;
+  fill: none;
+  opacity: 0.4;
+  stroke-linecap: round;
+}
+
+.header-solid {
+  background: #FFF;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
