@@ -9,11 +9,11 @@ export function Navigation() {
     const getLinkClass = (path: string) => {
         const isActive = pathname === path;
         const baseClass =
-            "text-xs font-bold uppercase tracking-widest transition-all";
+            "text-sm font-bold uppercase tracking-widest transition-all";
         if (isActive) {
-            return `${baseClass} text-[var(--nvidia-green)] border-b-2 border-[var(--nvidia-green)] pb-1`;
+            return `${baseClass} text-[var(--accent-blue)] border-b-2 border-[var(--accent-blue)] pb-1`;
         }
-        return `${baseClass} text-[var(--gunmetal-gray)] hover:text-[var(--obsidian-black)]`;
+        return `${baseClass} text-[var(--obsidian-black)] hover:text-[var(--obsidian-black)]`;
     };
 
     return (

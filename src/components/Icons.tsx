@@ -66,6 +66,69 @@ export const ChromaIcon = (props: React.SVGProps<SVGSVGElement>) => (
     </svg>
 );
 
+export const GoogleGenAIIcon = (props: React.SVGProps<SVGSVGElement>) => (
+    <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="1.5em"
+        height="1.5em"
+        style={{ flex: "none", lineHeight: "1" }}
+        viewBox="0 0 24 24"
+        {...props}
+    >
+        <path
+            fill="#3186FF"
+            d="M20.616 10.835a14.2 14.2 0 0 1-4.45-3.001 14.1 14.1 0 0 1-3.678-6.452.503.503 0 0 0-.975 0 14.13 14.13 0 0 1-3.679 6.452 14.2 14.2 0 0 1-4.45 3.001q-.976.42-2.002.678a.502.502 0 0 0 0 .975q1.025.258 2.002.677a14.2 14.2 0 0 1 4.45 3.001 14.1 14.1 0 0 1 3.679 6.453.502.502 0 0 0 .975 0q.258-1.026.677-2.003a14.15 14.15 0 0 1 3.001-4.45 14.1 14.1 0 0 1 6.453-3.678.503.503 0 0 0 0-.975 13 13 0 0 1-2.003-.678"
+        ></path>
+        <path
+            fill="url(#lobe-icons-gemini-fill-0)"
+            d="M20.616 10.835a14.2 14.2 0 0 1-4.45-3.001 14.1 14.1 0 0 1-3.678-6.452.503.503 0 0 0-.975 0 14.13 14.13 0 0 1-3.679 6.452 14.2 14.2 0 0 1-4.45 3.001q-.976.42-2.002.678a.502.502 0 0 0 0 .975q1.025.258 2.002.677a14.2 14.2 0 0 1 4.45 3.001 14.1 14.1 0 0 1 3.679 6.453.502.502 0 0 0 .975 0q.258-1.026.677-2.003a14.15 14.15 0 0 1 3.001-4.45 14.1 14.1 0 0 1 6.453-3.678.503.503 0 0 0 0-.975 13 13 0 0 1-2.003-.678"
+        ></path>
+        <path
+            fill="url(#lobe-icons-gemini-fill-1)"
+            d="M20.616 10.835a14.2 14.2 0 0 1-4.45-3.001 14.1 14.1 0 0 1-3.678-6.452.503.503 0 0 0-.975 0 14.13 14.13 0 0 1-3.679 6.452 14.2 14.2 0 0 1-4.45 3.001q-.976.42-2.002.678a.502.502 0 0 0 0 .975q1.025.258 2.002.677a14.2 14.2 0 0 1 4.45 3.001 14.1 14.1 0 0 1 3.679 6.453.502.502 0 0 0 .975 0q.258-1.026.677-2.003a14.15 14.15 0 0 1 3.001-4.45 14.1 14.1 0 0 1 6.453-3.678.503.503 0 0 0 0-.975 13 13 0 0 1-2.003-.678"
+        ></path>
+        <path
+            fill="url(#lobe-icons-gemini-fill-2)"
+            d="M20.616 10.835a14.2 14.2 0 0 1-4.45-3.001 14.1 14.1 0 0 1-3.678-6.452.503.503 0 0 0-.975 0 14.13 14.13 0 0 1-3.679 6.452 14.2 14.2 0 0 1-4.45 3.001q-.976.42-2.002.678a.502.502 0 0 0 0 .975q1.025.258 2.002.677a14.2 14.2 0 0 1 4.45 3.001 14.1 14.1 0 0 1 3.679 6.453.502.502 0 0 0 .975 0q.258-1.026.677-2.003a14.15 14.15 0 0 1 3.001-4.45 14.1 14.1 0 0 1 6.453-3.678.503.503 0 0 0 0-.975 13 13 0 0 1-2.003-.678"
+        ></path>
+        <defs>
+            <linearGradient
+                id="lobe-icons-gemini-fill-0"
+                x1="7"
+                x2="11"
+                y1="15.5"
+                y2="12"
+                gradientUnits="userSpaceOnUse"
+            >
+                <stop stopColor="#08B962"></stop>
+                <stop offset="1" stopColor="#08B962" stopOpacity="0"></stop>
+            </linearGradient>
+            <linearGradient
+                id="lobe-icons-gemini-fill-1"
+                x1="8"
+                x2="11.5"
+                y1="5.5"
+                y2="11"
+                gradientUnits="userSpaceOnUse"
+            >
+                <stop stopColor="#F94543"></stop>
+                <stop offset="1" stopColor="#F94543" stopOpacity="0"></stop>
+            </linearGradient>
+            <linearGradient
+                id="lobe-icons-gemini-fill-2"
+                x1="3.5"
+                x2="17.5"
+                y1="13.5"
+                y2="12"
+                gradientUnits="userSpaceOnUse"
+            >
+                <stop stopColor="#FABC12"></stop>
+                <stop offset="0.46" stopColor="#FABC12" stopOpacity="0"></stop>
+            </linearGradient>
+        </defs>
+    </svg>
+);
+
 export const DefaultIcon = (props: React.SVGProps<SVGSVGElement>) => (
     <svg
         xmlns="http://www.w3.org/2000/svg"

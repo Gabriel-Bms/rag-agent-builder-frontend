@@ -3,7 +3,7 @@
 
 import { useEffect, useState, useRef } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { LangChainIcon, OpenAIIcon, ChromaIcon, DefaultIcon } from "./Icons";
+import { LangChainIcon, OpenAIIcon, ChromaIcon, DefaultIcon, GoogleGenAIIcon } from "./Icons";
 import { CustomSelect } from "./CustomSelect";
 
 interface UploadResponse {
@@ -438,12 +438,12 @@ export function ModulesGrid() {
 
   return (
     <>
-      <div className="w-full max-w-[1280px] grid grid-cols-3 gap-8 relative z-10 mx-auto">
+      <div className="w-full max-w-[1280px] grid grid-cols-3 gap-x-16 gap-y-12 relative z-10 mx-auto">
         {/* Module 01: Upload Document */}
         <div className="glass-panel p-8 flex flex-col">
           <div className="flex justify-between items-start mb-6">
             <div>
-              <span className="text-[10px] font-bold text-[var(--brushed-bronze)] uppercase tracking-widest block mb-1">
+              <span className="text-sm font-bold text-[var(--brushed-bronze)] uppercase tracking-widest block mb-1">
                 Módulo 01
               </span>
               <h3 className="text-xl font-bold text-[var(--obsidian-black)] tracking-tight">
@@ -519,7 +519,7 @@ export function ModulesGrid() {
         <div className="glass-panel p-8 flex flex-col">
           <div className="flex justify-between items-start mb-8">
             <div>
-              <span className="text-[10px] font-bold text-[var(--brushed-bronze)] uppercase tracking-widest block mb-1">
+              <span className="text-sm font-bold text-[var(--brushed-bronze)] uppercase tracking-widest block mb-1">
                 Módulo 02
               </span>
               <h3 className="text-xl font-bold text-[var(--obsidian-black)] tracking-tight">
@@ -617,7 +617,7 @@ export function ModulesGrid() {
         <div className="glass-panel p-8 flex flex-col">
           <div className="flex justify-between items-start mb-8">
             <div>
-              <span className="text-[10px] font-bold text-[var(--brushed-bronze)] uppercase tracking-widest block mb-1">
+              <span className="text-sm font-bold text-[var(--brushed-bronze)] uppercase tracking-widest block mb-1">
                 Módulo 03
               </span>
               <h3 className="text-xl font-bold text-[var(--obsidian-black)] tracking-tight">
@@ -643,7 +643,7 @@ export function ModulesGrid() {
                 options={[
                   { value: "OpenAI", label: "OpenAI", icon: OpenAIIcon },
                   { value: "AWS Bedrock", label: "AWS Bedrock", icon: DefaultIcon },
-                  { value: "Google GenAI", label: "Google GenAI", icon: DefaultIcon },
+                  { value: "Google GenAI", label: "Google GenAI", icon: GoogleGenAIIcon },
                 ]}
               />
             </div>
@@ -776,7 +776,7 @@ export function ModulesGrid() {
         <div className="glass-panel p-8 flex flex-col">
           <div className="flex justify-between items-start mb-8">
             <div>
-              <span className="text-[10px] font-bold text-[var(--brushed-bronze)] uppercase tracking-widest block mb-1">
+              <span className="text-sm font-bold text-[var(--brushed-bronze)] uppercase tracking-widest block mb-1">
                 Módulo 04
               </span>
               <h3 className="text-xl font-bold text-[var(--obsidian-black)] tracking-tight">
@@ -848,7 +848,7 @@ export function ModulesGrid() {
         <div className="glass-panel p-8 flex flex-col">
           <div className="flex justify-between items-start mb-8">
             <div>
-              <span className="text-[10px] font-bold text-[var(--brushed-bronze)] uppercase tracking-widest block mb-1">
+              <span className="text-sm font-bold text-[var(--brushed-bronze)] uppercase tracking-widest block mb-1">
                 Módulo 05
               </span>
               <h3 className="text-xl font-bold text-[var(--obsidian-black)] tracking-tight">
@@ -910,7 +910,7 @@ export function ModulesGrid() {
         <div className="glass-panel p-8 flex flex-col">
           <div className="flex justify-between items-start mb-8">
             <div>
-              <span className="text-[10px] font-bold text-[var(--brushed-bronze)] uppercase tracking-widest block mb-1">
+              <span className="text-sm font-bold text-[var(--brushed-bronze)] uppercase tracking-widest block mb-1">
                 Módulo 06
               </span>
               <h3 className="text-xl font-bold text-[var(--obsidian-black)] tracking-tight">
