@@ -476,8 +476,8 @@ export function ModulesGrid() {
                   </span>
                 )}
               </div>
-              <p className="text-xs text-[var(--gunmetal-gray)] text-center font-semibold mb-4">
-                {isUploading ? "INGESTING DATA..." : "DRAG & DROP DATA CORE"}
+              <p className="text-sm text-[var(--gunmetal-gray)] text-center font-semibold mb-4">
+                {isUploading ? "INGESTING DATA..." : "Suelta tu archivo aquí"}
               </p>
               <button
                 onClick={handleFileSelect}
@@ -677,7 +677,7 @@ export function ModulesGrid() {
                       value={selectedCredential}
                       onChange={(e) => setSelectedCredential(e.target.value)}
                     >
-                      <option value="">Select credential...</option>
+                      <option value="">Seleccionar Credencial...</option>
                       {credentials
                         .filter(cred => {
                           const providerMap: { [key: string]: string } = {
@@ -973,7 +973,7 @@ export function ModulesGrid() {
                       value={selectedLlmCredential}
                       onChange={(e) => setSelectedLlmCredential(e.target.value)}
                     >
-                      <option value="">Select credential...</option>
+                      <option value="">Seleccionar Credencial...</option>
                       {credentials
                         .filter(cred => cred.provider === "openai")
                         .map((cred) => (
